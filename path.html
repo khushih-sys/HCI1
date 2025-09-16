@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Path@Penn – Mobile Registration Sidebar (Mock)</title>
+  <style>
+    :root {
+      --red: #c62828;          /* sidebar background */
+      --navy: #0f2d4a;         /* dark blue blocks */
+      --link-blue: #2233cc;    /* link text */
+      --light-gray: #e9edf2;   /* page background */
+      --chip-gray: #d8dbe2;    /* previous searches pane */
+      --text: #0b0b0b;
+      --white: #ffffff;
+      --corner-xl: 22px;
+      --corner-lg: 14px;
+      --corner-md: 10px;
+      --shadow: 0 8px 24px rgba(0,0,0,.18);
+    }
+
+    /* Page frame to simulate a phone */
+    body {
+      margin: 0;
+      background: var(--light-gray);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      min-height: 100svh;
+    }
+
+    .phone {
+      width: 390px;             /* iPhone 12/13/14 logical width */
+      min-height: 780px;        /* flexible height */
+      background: linear-gradient(180deg, #f6f8fb 0%, #eef2f7 100%);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 12px 16px 8px 16px;
+    }
+
+    /* Sidebar card */
+    .sidebar {
+      background: var(--red);
+      border-radius: 12px;
+      padding: 16px 16px 10px 16px;
+    }
+
+    .pill {
+      background: var(--white);
+      color: var(--link-blue);
+      text-align: center;
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-weight: 800;
+      letter-spacing: .4px;
+      margin: 6px 8px 16px 8px;
+      border: 2px solid var(--link-blue);
+    }
+
+    /* Search panel */
+    .search-card {
+      background: var(--white);
+      border-radius: var(--corner-md);
+      padding: 0;
+      overflow: hidden;
+      margin: 0 0 14px 0;
+      border: 2px solid rgba(0,0,0,.06);
+    }
+
+    .search-input {
+      width: 100%;
+      border: 0;
+      padding: 14px 12px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .prev-searches {
+      background: var(--chip-gray);
+      padding: 10px 12px 12px 12px;
+      font-size: 15px;
+      line-height: 1.4;
+      color: var(--link-blue);
+    }
+
+    .prev-searches .label {
+      display: block;
+      color: #2a2a2a;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    /* Dark action blocks */
+    .cta {
+      background: var(--navy);
+      color: var(--white);
+      text-align: center;
+      padding: 14px 16px;
+      border-radius: var(--corner-md);
+      font-weight: 800;
+      margin: 10px 0;
+      text-decoration: none;
+      display: block;
+    }
+
+    /* Filter list */
+    .filters {
+      display: grid;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .filter-item {
+      background: var(--white);
+      border: 2px solid rgba(0,0,0,.06);
+      border-radius: var(--corner-md);
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 16px;
+      font-style: italic; /* matches screenshot style */
+      color: var(--link-blue);
+    }
+
+    .chevron {
+      font-style: normal;
+      font-weight: 700;
+      color: #5b6b8b;
+    }
+
+    /* PennCourseChat row */
+    .chat {
+      background: var(--white);
+      border: 2px solid rgba(0,0,0,.06);
+      border-radius: var(--corner-md);
+      padding: 12px 14px;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #203a52;
+      font-style: italic;
+      font-weight: 700;
+    }
+
+    /* Focus & tap affordances */
+    a, button, .filter-item, .chat, .cta {
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+    }
+    .filter-item:focus-visible,
+    .chat:focus-visible,
+    .cta:focus-visible {
+      outline: 3px solid #ffde86;
+      outline-offset: 2px;
+    }
+
+    /* make the whole card scrollable if content grows */
+    .scroll-area {
+      max-height: calc(780px - 32px);
+      overflow-y: auto;
+      padding-right: 2px; /* keep shadow visible */
+    }
+  </style>
+</head>
+<body>
+  <main class="phone" role="main" aria-label="Path@Penn Mobile Mock">
+    <section class="sidebar" aria-label="Search and Filters">
+      <div class="pill" aria-label="Search Classes header">SEARCH CLASSES</div>
+
+      <!-- Search + Previous Searches -->
+      <div class="search-card" role="search">
+        <label class="visually-hidden" for="search">Search</label>
+        <input id="search" class="search-input" type="search" placeholder="Search Classes, Prof, etc." aria-label="Search classes, professor, etc." />
+        <div class="prev-searches" aria-live="polite">
+          <span class="label">Previous Searches:</span>
+          CIS 2400<br />
+          ECON 2300<br />
+          ANTH 0120
+        </div>
+      </div>
+
+      <!-- Dark CTAs -->
+      <a href="#" class="cta" role="button" aria-label="Explore Programs">Explore Programs</a>
+      <a href="#" class="cta" role="button" aria-label="Degree Audit and Advising">Degree Audit/Advising</a>
+
+      <!-- Filters -->
+      <div class="filters" aria-label="Filters">
+        <div class="filter-item" tabindex="0" role="button" aria-label="Filter by Subject">
+          <span>Subject</span>
+          <span class="chevron">&gt;</span>
+        </div>
+        <div class="filter-item" tabindex="0" role="button" aria-label="Filter by School">
+          <span>School</span>
+          <span class="chevron">&gt;</span>
+        </div>
+        <div class="filter-item" tabindex="0" role="button" aria-label="Filter by Level">
+          <span>Level</span>
+          <span class="chevron">&gt;</span>
+        </div>
+        <div class="filter-item" tabindex="0" role="button" aria-label="Filter by Credit">
+          <span>Credit</span>
+          <span class="chevron">&gt;</span>
+        </div>
+        <div class="filter-item" tabindex="0" role="button" aria-label="Filter by Course Attribute">
+          <span>Course Attribute</span>
+          <span class="chevron">&gt;</span>
+        </div>
+      </div>
+
+      <!-- PennCourseChat row -->
+      <div class="chat" tabindex="0" role="button" aria-label="Ask PennCourseChat">
+        <span>Ask PennCourseChat</span>
+        <span class="chevron">&gt;</span>
+      </div>
+    </section>
+  </main>
+
+  <!-- Optional: visually hidden utility class -->
+  <style>
+    .visually-hidden {
+      position: absolute !important;
+      height: 1px; width: 1px;
+      overflow: hidden;
+      clip: rect(1px, 1px, 1px, 1px);
+      white-space: nowrap; /* prevent line breaks */
+    }
+  </style>
+</body>
+</html>
+
